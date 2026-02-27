@@ -91,7 +91,10 @@ uv run play Mjlab-Tracking-Flat-Unitree-G1 --wandb-run-path your-org/mjlab/run-i
 Use built-in agents to sanity check your MDP before training:
 
 ```bash
+uv run play Mjlab-Velocity-Flat-Alex-V1 --agent zero # Sends zero actions IHMC Alex
+
 uv run play Mjlab-Your-Task-Id --agent zero  # Sends zero actions
+
 uv run play Mjlab-Your-Task-Id --agent random  # Sends uniform random actions
 ```
 
