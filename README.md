@@ -37,6 +37,21 @@ For alternative installation methods (PyPI, Docker), see the [Installation Guide
 
 ## Training Examples
 
+### train IHMC Alex robot
+
+Train a IHMC Alex humanoid to follow velocity commands on flat terrain:
+
+```bash
+ uv run train Mjlab-Velocity-Flat-Alex-V1 --env.scene.num-envs 4096
+```
+
+Play or Evaluate a policy while training (fetches latest checkpoint from Weights & Biases):
+
+```bash
+uv run play Mjlab-Velocity-Flat-Alex-V1 --wandb-run-path your-org/mjlab/run-id
+```
+
+
 ### 1. Velocity Tracking
 
 Train a Unitree G1 humanoid to follow velocity commands on flat terrain:
