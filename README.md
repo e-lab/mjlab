@@ -86,6 +86,19 @@ uv run train Mjlab-Tracking-Flat-Alex-V1 --env.commands.motion.motion-file motio
 
 Or:
 
+Our new csv to npx conversion script:
+
+```
+  .venv/bin/python scripts/motions/lafan_to_g1.py \
+    --input_file motions/dance1_subject1.csv \
+    --input_fps 30 \
+    --frame_range 1 20 \
+    --output_name dance1_subject1_g1_cli \
+    --output_fps 50 \
+    --device cpu
+```
+
+Or thei original way:
 
 Train a humanoid to mimic reference motions. mjlab uses WandB to manage motion datasets.
 See the [motion preprocessing documentation](https://github.com/HybridRobotics/whole_body_tracking/blob/main/README.md#motion-preprocessing--registry-setup) for setup instructions.
