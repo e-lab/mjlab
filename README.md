@@ -37,21 +37,6 @@ For alternative installation methods (PyPI, Docker), see the [Installation Guide
 
 ## Training Examples
 
-### train IHMC Alex robot
-
-Train a IHMC Alex humanoid to follow velocity commands on flat terrain:
-
-```bash
- uv run train Mjlab-Velocity-Flat-Alex-V1 --env.scene.num-envs 4096
-```
-
-Play or Evaluate a policy while training (fetches latest checkpoint from Weights & Biases):
-
-```bash
-uv run play Mjlab-Velocity-Flat-Alex-V1 --wandb-run-path your-org/mjlab/run-id
-```
-
-
 ### 1. Velocity Tracking
 
 Train a Unitree G1 humanoid to follow velocity commands on flat terrain:
@@ -78,6 +63,30 @@ uv run play Mjlab-Velocity-Flat-Unitree-G1 --wandb-run-path your-org/mjlab/run-i
 
 ### 2. Motion Imitation
 
+for IHMC Alex:
+
+You can use the LAFAN1 dataset examples. E.g.: https://huggingface.co/datasets/lvhaidong/LAFAN1_Retargeting_Dataset/tree/main/g1 → dance1_subject1.csv 
+
+Convert the LAFAN G1 robot example to Alex with:
+
+```bash
+  .venv/bin/python scripts/motions/lafan_to_alex.py \
+    --input-csv motions/dance1_subject1.csv \
+    --output-npz motions/dance1_subject1_alex_tracking.npz \
+    --input-fps 30 \
+    --output-fps 50 \
+    --device cuda:0
+```
+
+Train with:
+
+```bash
+uv run train Mjlab-Tracking-Flat-Alex-V1 --env.commands.motion.motion-file motions/dance1_subject1_alex_tracking.npz
+```
+
+Or:
+
+
 Train a humanoid to mimic reference motions. mjlab uses WandB to manage motion datasets.
 See the [motion preprocessing documentation](https://github.com/HybridRobotics/whole_body_tracking/blob/main/README.md#motion-preprocessing--registry-setup) for setup instructions.
 
@@ -91,10 +100,7 @@ uv run play Mjlab-Tracking-Flat-Unitree-G1 --wandb-run-path your-org/mjlab/run-i
 Use built-in agents to sanity check your MDP before training:
 
 ```bash
-uv run play Mjlab-Velocity-Flat-Alex-V1 --agent zero # Sends zero actions IHMC Alex
-
 uv run play Mjlab-Your-Task-Id --agent zero  # Sends zero actions
-
 uv run play Mjlab-Your-Task-Id --agent random  # Sends uniform random actions
 ```
 
