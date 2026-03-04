@@ -59,6 +59,9 @@ Evaluate a policy while training (fetches latest checkpoint from Weights & Biase
 
 ```bash
 uv run play Mjlab-Velocity-Flat-Unitree-G1 --wandb-run-path your-org/mjlab/run-id
+
+# Alex trained model:
+mjpython src/mjlab/scripts/play.py Mjlab-Velocity-Flat-Alex-V1 --wandb-run-path culurciello/mjlab/ib5nrc31
 ```
 
 ### 2. Motion Imitation
@@ -98,7 +101,21 @@ Our new csv to npx conversion script:
     --device cpu
 ```
 
-Or thei original way:
+
+Play with
+
+```bash
+mjpython src/mjlab/scripts/play.py Mjlab-Tracking-Flat-Alex-V1 --motion-file motions/dance1_subject1_alex.npz  --viewer viser --wandb-run-path culurciello/mjlab/hucetrde
+```
+
+Test action with no learning - useful to test if motion is correct for robot:
+
+```bash
+mjpython src/mjlab/scripts/play.py Mjlab-Tracking-Flat-Alex-V1 --motion-file motions/alex_open_door1.npz --viewer viser --agent zero --no-terminations=True
+```
+
+
+Or their original way:
 
 Train a humanoid to mimic reference motions. mjlab uses WandB to manage motion datasets.
 See the [motion preprocessing documentation](https://github.com/HybridRobotics/whole_body_tracking/blob/main/README.md#motion-preprocessing--registry-setup) for setup instructions.
